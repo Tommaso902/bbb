@@ -105,7 +105,21 @@
       color: #fff;
       font-size: 0.9rem;
       outline: none;
-      cursor: not-allowed;
+    }
+
+    .fake-search button {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .fake-search button:hover {
+      background: rgba(255,255,255,0.3);
     }
 
     .bg-controller {
@@ -242,8 +256,9 @@
       padding: 20px;
     }
 
-    .panel { margin-top: 16px; display: none; }
+    .panel { margin-top: 16px; display: none; border-radius: 10px; }
     .panel.active { display: block; }
+    .panel.match { border: 2px solid #ffd700; box-shadow: 0 0 14px rgba(255, 215, 0, 0.45); }
 
     .panel h2 { margin-top: 0; color: var(--primary); }
     .panel figure { margin: 12px 0; }
@@ -518,9 +533,10 @@
       <img src="logo-barcellona-oggi.jpg" alt="FC Barcelona logo" class="team-logo" />
       <h1>FC Barcelona</h1>
       <p>Scopri la storia, i trofei e la rosa in stile “card info”.</p>
-      <div class="fake-search">
+      <div class="fake-search" role="search">
         <span>🔍</span>
-        <input type="text" placeholder="Cerca argomento... (es. Messi, 2009, Camp Nou)" aria-label="Ricerca" disabled>
+        <input id="searchInput" type="search" placeholder="Cerca argomento... (es. Messi, 2009, Camp Nou)" aria-label="Ricerca" />
+        <button id="searchBtn" type="button" aria-label="Esegui ricerca">Vai</button>
       </div>
     </div>
   </header>
@@ -656,6 +672,31 @@
             card.click();
           }
         });
+      });
+
+      const searchBtn = document.getElementById('searchBtn');
+      const searchInput = document.getElementById('searchInput');
+
+      function performSearch() {
+        const term = (searchInput.value || '').trim().toLowerCase();
+        if (!term) return;
+
+        const panels = Array.from(document.querySelectorAll('.panel'));
+        const target = panels.find(panel => panel.textContent.toLowerCase().includes(term));
+
+        document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('match'));
+        if (target) {
+          target.classList.add('match');
+          showSection(target.id);
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      searchBtn.addEventListener('click', performSearch);
+      searchInput.addEventListener('keydown', ev => {
+        if (ev.key === 'Enter') {
+          performSearch();
+        }
       });
     });
   </script>
