@@ -10,7 +10,7 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Camp_Nou_2022.jpg/1920px-Camp_Nou_2022.jpg') no-repeat center center fixed;
+      background: url('barcellona.webp') no-repeat center center fixed;
       background-size: cover;
       color: #111;
     }
@@ -22,8 +22,25 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
     .header-inner {
+      position: relative;
       max-width: 960px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .team-logo {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: rgba(255,255,255,0.9);
+      padding: 4px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
     .header-inner h1 {
       margin: 0;
@@ -61,13 +78,51 @@
       margin: 24px auto;
       padding: 0;
     }
+
+    .bg-controller {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.38);
+      color: white;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45);
+      padding: 6px 10px;
+      backdrop-filter: blur(8px);
+    }
+    .bg-controller button {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+    }
+    .bg-controller button:hover {
+      background: rgba(255,255,255,0.28);
+    }
+    .bg-controller span {
+      font-size: 0.9rem;
+    }
     .content-area {
-      background: white;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
       padding: 20px;
       flex: 1;
       min-width: 0;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .container {
+      background: transparent;
     }
     aside#sidebar {
       position: sticky;
@@ -97,18 +152,55 @@
     .sidebar-card a:hover {
       text-decoration: underline;
     }
+
+    .cards-strip {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding: 0 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+      backdrop-filter: blur(4px);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+    }
+    .card h4 {
+      margin: 0 0 6px;
+      color: #ffd700;
+    }
+    .card p {
+      margin: 0;
+      color: #f1f1f1;
+      font-size: 0.9rem;
+    }
     aside#sidebar button {
       cursor: pointer;
       padding: 10px;
       border: 1px solid #dfe1e5;
-      background-color: #fafafa;
+      background-color: #ffffff;
       color: #202124;
       border-radius: 6px;
       font-weight: bold;
       transition: all .2s ease;
     }
     aside#sidebar button:hover {
-      background-color: #f1f3f4;
+      background-color: #e8eaed;
       transform: translateY(-1px);
     }
     .panel {
@@ -177,6 +269,7 @@
 <body>
   <header>
     <div class="header-inner">
+      <img src="logo-barcellona-oggi.jpg" alt="FC Barcelona logo" class="team-logo" />
       <h1>FC Barcelona</h1>
       <p>Scopri la storia, i trofei e la rosa in stile “card info”.</p>
       <div class="fake-search">
@@ -186,8 +279,28 @@
     </div>
   </header>
 
+  <div class="bg-controller" role="toolbar" aria-label="Controlli sfondo" >
+    <button id="prevBg" aria-label="Sfondo precedente">◀</button>
+    <span id="bgLabel">1/3</span>
+    <button id="nextBg" aria-label="Sfondo successivo">▶</button>
+  </div>
+
   <main class="container">
-    <aside id="sidebar">
+    <div class="cards-strip">
+      <div class="card" onclick="showSection('storia')">
+        <h4>Storia del Barcelona</h4>
+        <p>Dal 1899 al Camp Nou, i momenti epici.</p>
+      </div>
+      <div class="card" onclick="showSection('trofei')">
+        <h4>Trofei</h4>
+        <p>Vittorie leggendarie e grandi trionfi.</p>
+      </div>
+      <div class="card" onclick="showSection('squadra')">
+        <h4>Squadra attuale</h4>
+        <p>Giocatori chiave e formazione attuale.</p>
+      </div>
+    </div>
+    <aside id="sidebar" aria-label="Menu laterale">
       <div class="sidebar-card">
         <h4>Sezioni</h4>
         <button onclick="showSection('storia')">Storia del Barcelona</button>
@@ -234,6 +347,28 @@
   </main>
 
   <script>
+    const backgroundImages = [
+      'Web_Box_Landing_Total_Experience_3200x2000_01_CAT.webp',
+      'barcellona.webp',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Camp_Nou_2022.jpg/1920px-Camp_Nou_2022.jpg'
+    ];
+    let currentBg = 0;
+
+    function updateBackground() {
+      document.body.style.backgroundImage = `url('${backgroundImages[currentBg]}')`;
+      document.getElementById('bgLabel').textContent = `${currentBg + 1}/${backgroundImages.length}`;
+    }
+
+    function prevBackground() {
+      currentBg = (currentBg - 1 + backgroundImages.length) % backgroundImages.length;
+      updateBackground();
+    }
+
+    function nextBackground() {
+      currentBg = (currentBg + 1) % backgroundImages.length;
+      updateBackground();
+    }
+
     function showSection(id) {
       const panels = document.querySelectorAll('.panel');
       panels.forEach(p => p.hidden = true);
@@ -243,6 +378,11 @@
         selected.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
+
+    document.getElementById('prevBg').addEventListener('click', prevBackground);
+    document.getElementById('nextBg').addEventListener('click', nextBackground);
+
+    updateBackground();
   </script>
 
   <footer>
