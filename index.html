@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storia del FC Barcelona</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Camp_Nou_2022.jpg/1920px-Camp_Nou_2022.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #111;
+    }
+    header {
+      background: linear-gradient(135deg, #004d98 0%, #1e6abf 100%);
+      color: #fff;
+      padding: 20px 30px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header-inner h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .header-inner p {
+      margin: 8px 0 14px;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    .fake-search {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid #dcdcdc;
+      border-radius: 24px;
+      padding: 8px 12px;
+      max-width: 520px;
+      margin: 0 auto;
+      color: #444;
+    }
+    .fake-search input {
+      border: none;
+      width: 100%;
+      outline: none;
+      font-size: 14px;
+      color: #333;
+      background: transparent;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      max-width: 1140px;
+      margin: 24px auto;
+      padding: 0;
+    }
+    .content-area {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      flex: 1;
+      min-width: 0;
+    }
+    aside#sidebar {
+      position: sticky;
+      top: 24px;
+      align-self: flex-start;
+      width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sidebar-card {
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .sidebar-card h4 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .sidebar-card a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .sidebar-card a:hover {
+      text-decoration: underline;
+    }
+    aside#sidebar button {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #dfe1e5;
+      background-color: #fafafa;
+      color: #202124;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all .2s ease;
+    }
+    aside#sidebar button:hover {
+      background-color: #f1f3f4;
+      transform: translateY(-1px);
+    }
+    .panel {
+      margin-top: 12px;
+      border-top: 1px solid #eee;
+      padding-top: 12px;
+      animation: fadein .3s ease;
+    }
+    @keyframes fadein {
+      from {opacity: 0; transform: translateY(6px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .content-area {
+      flex: 1;
+      min-width: 0;
+    }
+
+    aside#sidebar {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      width: 220px;
+      border-left: 3px solid #004d98;
+      padding-left: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    aside#sidebar button {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #004d98;
+      background-color: #d2001a;
+      color: white;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    aside#sidebar button:hover {
+      background-color: #bb0018;
+    }
+
+    .panel {
+      margin-top: 16px;
+      border-top: 1px solid #ddd;
+      padding-top: 12px;
+    }
+
+    h2 {
+      color: #004d98;
+      margin-top: 1.4em;
+    }
+    section {
+      margin-bottom: 1.5em;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>FC Barcelona</h1>
+      <p>Scopri la storia, i trofei e la rosa in stile “card info”.</p>
+      <div class="fake-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Cerca argomento... (es. Messi, 2009, Camp Nou)" aria-label="Ricerca" disabled>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <aside id="sidebar">
+      <div class="sidebar-card">
+        <h4>Sezioni</h4>
+        <button onclick="showSection('storia')">Storia del Barcelona</button>
+        <button onclick="showSection('trofei')">Trofei</button>
+        <button onclick="showSection('squadra')">Squadra attuale</button>
+      </div>
+      <div class="sidebar-card">
+        <h4>Visitare</h4>
+        <p><a href="./storia del barcellona/index.html">Dettagli Storici</a></p>
+        <p><a href="./trofei/index.html">Lista Trofei</a></p>
+        <p><a href="./squadra attuale/index.html">Rosa ufficiale</a></p>
+      </div>
+    </aside>
+
+    <section class="content-area">
+      <div id="storia" class="panel" hidden>
+        <h2>Storia del FC Barcelona</h2>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Camp_Nou_2022.jpg/640px-Camp_Nou_2022.jpg" alt="Camp Nou" />
+        <figcaption>Camp Nou, casa del Barça dal 1957</figcaption></figure>
+        <p>Il Futbol Club Barcelona venne fondato il 29 novembre 1899 dall'imprenditore svizzero Joan Gamper. In breve tempo il club si affermò come uno dei principali simboli di identità catalana.</p>
+        <p>Il motto del club è "Més que un club" (Più di un club), e la sua storia è segnata da un forte legame culturale e sociale con la Catalogna.</p>
+      </div>
+
+      <div id="trofei" class="panel" hidden>
+        <h2>Trofei del FC Barcelona</h2>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/2015_UCL_trophy.jpg/640px-2015_UCL_trophy.jpg" alt="Champions League Trophy" />
+        <figcaption>La UEFA Champions League vinta nel 2015</figcaption></figure>
+        <p>Il Barça ha vinto numerosi titoli nazionali e internazionali, tra cui la Liga, la Copa del Rey e la UEFA Champions League.</p>
+        <p>Il periodo d'oro sotto Pep Guardiola ha portato anche a due triplette (Liga, Copa e Champions).</p>
+      </div>
+
+      <div id="squadra" class="panel" hidden>
+        <h2>Squadra attuale</h2>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/FC_Barcelona_2022.jpg/640px-FC_Barcelona_2022.jpg" alt="FC Barcelona squad" />
+        <figcaption>Rosa attuale in una formazione iconica</figcaption></figure>
+        <ul>
+          <li>Portiere: Marc-André ter Stegen</li>
+          <li>Difensori: Jordi Alba, Ronald Araújo, Jules Koundé</li>
+          <li>Centrocampisti: Pedri, Frenkie de Jong, Gavi</li>
+          <li>Attaccanti: Robert Lewandowski, Raphinha, João Félix</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showSection(id) {
+      const panels = document.querySelectorAll('.panel');
+      panels.forEach(p => p.hidden = true);
+      const selected = document.getElementById(id);
+      if (selected) {
+        selected.hidden = false;
+        selected.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
+
+  <footer>
+    <p>Pagina creata come esempio di sito sulla storia del FC Barcelona.</p>
+  </footer>
+</body>
+</html>
