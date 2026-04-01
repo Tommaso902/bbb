@@ -5,23 +5,272 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Storia del FC Barcelona</title>
   <style>
+    :root {
+      --primary: #004d98;
+      --secondary: #d2001a;
+      --text: #f9f9f9;
+      --bg: rgba(0,0,0,0.38);
+      --card: rgba(255,255,255,0.12);
+      --radius: 14px;
+      --shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
       margin: 0;
-      padding: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      color: #fff;
       background: url('barcellona.webp') no-repeat center center fixed;
       background-size: cover;
-      color: #111;
+      min-height: 100vh;
+      line-height: 1.5;
     }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.6) 100%);
+      z-index: 0;
+    }
+
     header {
-      background: linear-gradient(135deg, #004d98 0%, #1e6abf 100%);
-      color: #fff;
-      padding: 20px 30px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 10;
+      background: rgba(7, 17, 29, 0.25);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid rgba(255,255,255,0.14);
     }
+
     .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.95);
+      background: #fff;
+      padding: 4px;
+      object-fit: cover;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      font-size: 0.94rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .fake-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 8px 12px;
+      min-width: 250px;
+      max-width: 460px;
+    }
+
+    .fake-search input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: not-allowed;
+    }
+
+    .bg-controller {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 15;
+      background: rgba(0,0,0,0.44);
+      border: 1px solid rgba(255,255,255,0.38);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .bg-controller button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      transition: 0.2s;
+    }
+
+    .bg-controller button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.3);
+    }
+
+    .bg-controller span {
+      font-size: 0.92rem;
+      font-weight: 600;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 5;
+      max-width: 1200px;
+      margin: 16px auto;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cards-strip {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 16px;
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.23);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .card:hover, .card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 36px rgba(0,0,0,0.32);
+      border-color: rgba(255,255,255,0.35);
+      outline: none;
+    }
+
+    .card h4 { margin: 0 0 8px; font-size: 1.04rem; color: #ffd700; }
+    .card p { margin: 0; color: rgba(255,255,255,0.92); font-size: 0.92rem; }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 18px;
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      padding: 0 16px 20px;
+      z-index: 5;
+      position: relative;
+    }
+
+    aside#sidebar {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      gap: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-card {
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.42);
+      padding: 16px;
+    }
+
+    .sidebar-card h4 { margin: 0 0 10px; color: #fff; }
+    .sidebar-card a { color: #ffd700; text-decoration: none; }
+    .sidebar-card a:hover { text-decoration: underline; }
+
+    .sidebar-actions { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-actions button {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.45);
+      color: #fff;
+      text-align: left;
+      border-radius: 9px;
+      padding: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .sidebar-actions button:hover { background: rgba(255,255,255,0.28); }
+
+    .content-area {
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .panel { margin-top: 16px; display: none; }
+    .panel.active { display: block; }
+
+    .panel h2 { margin-top: 0; color: var(--primary); }
+    .panel figure { margin: 12px 0; }
+    .panel img { max-width: 100%; border-radius: 10px; height: auto; }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.82);
+      padding: 14px 5px;
+      font-size: 0.86rem;
+      margin-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    @media (max-width: 1000px) {
+      .container { grid-template-columns: 1fr; }
+      aside#sidebar { position: relative; top: 0; }
+      .cards-strip { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .header-inner { gap: 8px; padding: 14px 10px; }
+      .brand h1 { font-size: 1.5rem; }
+      .bg-controller { top: auto; bottom: 14px; right: 14px; }
+      .hero { padding: 12px 10px; }
+    }
+  </style>    .header-inner {
       position: relative;
       max-width: 960px;
       margin: 0 auto;
@@ -214,10 +463,7 @@
       to {opacity: 1; transform: translateY(0);}
     }
 
-    .content-area {
-      flex: 1;
-      min-width: 0;
-    }
+    /* content-area è già definito sopra */
 
     aside#sidebar {
       position: sticky;
@@ -285,21 +531,25 @@
     <button id="nextBg" aria-label="Sfondo successivo">▶</button>
   </div>
 
-  <main class="container">
+  <div class="overlay"></div>
+  <main class="hero">
     <div class="cards-strip">
-      <div class="card">
+      <div class="card" onclick="showSection('storia')" role="button" aria-pressed="false" tabindex="0">
         <h4>Storia del Barcelona</h4>
         <p>Scopri le origini di Joan Gamper, l’evoluzione del club e la sua crescita fino a diventare simbolo della Catalogna nel mondo.</p>
       </div>
-      <div class="card">
+      <div class="card" onclick="showSection('trofei')" role="button" aria-pressed="false" tabindex="0">
         <h4>Trofei</h4>
         <p>Un viaggio tra i titoli internazionali e nazionali, le triple vittorie e i record che hanno costruito il mito blaugrana.</p>
       </div>
-      <div class="card">
+      <div class="card" onclick="showSection('squadra')" role="button" aria-pressed="false" tabindex="0">
         <h4>Squadra attuale</h4>
         <p>Panoramica sui giocatori in rosa, lo stile di gioco contemporaneo e i talenti della Masia che guidano la nuova generazione.</p>
       </div>
     </div>
+  </main>
+
+  <main class="container">
     <aside id="sidebar" aria-label="Menu laterale">
       <div class="sidebar-card">
         <h4>Sezioni</h4>
@@ -316,7 +566,7 @@
     </aside>
 
     <section class="content-area">
-      <div id="storia" class="panel" hidden>
+      <div id="storia" class="panel active">
         <h2>Storia del FC Barcelona</h2>
         <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Camp_Nou_2022.jpg/640px-Camp_Nou_2022.jpg" alt="Camp Nou" />
         <figcaption>Camp Nou, casa del Barça dal 1957</figcaption></figure>
@@ -352,6 +602,7 @@
       'barcellona.webp'
     ];
     let currentBg = 0;
+    let intervalId;
 
     function updateBackground() {
       document.body.style.backgroundImage = `url('${backgroundImages[currentBg]}')`;
@@ -361,27 +612,52 @@
     function prevBackground() {
       currentBg = (currentBg - 1 + backgroundImages.length) % backgroundImages.length;
       updateBackground();
+      resetBgAutoRotate();
     }
 
     function nextBackground() {
       currentBg = (currentBg + 1) % backgroundImages.length;
       updateBackground();
+      resetBgAutoRotate();
     }
 
     function showSection(id) {
-      const panels = document.querySelectorAll('.panel');
-      panels.forEach(p => p.hidden = true);
+      document.querySelectorAll('.panel.active').forEach(p => p.classList.remove('active'));
       const selected = document.getElementById(id);
-      if (selected) {
-        selected.hidden = false;
-        selected.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (selected) selected.classList.add('active');
+      document.querySelectorAll('.card').forEach(c => c.setAttribute('aria-pressed', 'false'));
+      const activeCard = document.querySelector(`.card[onclick="showSection('${id}')"]`);
+      if (activeCard) activeCard.setAttribute('aria-pressed', 'true');
+    }
+
+    function startBgAutoRotate() {
+      intervalId = setInterval(() => {
+        currentBg = (currentBg + 1) % backgroundImages.length;
+        updateBackground();
+      }, 7000);
+    }
+
+    function resetBgAutoRotate() {
+      clearInterval(intervalId);
+      startBgAutoRotate();
     }
 
     document.getElementById('prevBg').addEventListener('click', prevBackground);
     document.getElementById('nextBg').addEventListener('click', nextBackground);
 
     updateBackground();
+    startBgAutoRotate();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('keydown', ev => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            card.click();
+          }
+        });
+      });
+    });
   </script>
 
   <footer>
